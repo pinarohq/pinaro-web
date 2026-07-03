@@ -8,6 +8,7 @@ import CustomCursor from '@/components/portfolio/CustomCursor';
 import SmoothScroll from '@/components/portfolio/SmoothScroll';
 import NoiseOverlay from '@/components/portfolio/NoiseOverlay';
 import CommandPalette from '@/components/portfolio/CommandPalette';
+import ScrollProgress from '@/components/portfolio/ScrollProgress';
 import Home from '@/pages/Home';
 import ProjectDetail from '@/pages/ProjectDetail';
 import NotFound from '@/pages/NotFound';
@@ -18,6 +19,7 @@ function Shell() {
   return (
     <>
       <SmoothScroll />
+      <ScrollProgress />
       <CustomCursor />
       <NoiseOverlay />
       <Navigation onOpenCommand={() => setCmdOpen(true)} />

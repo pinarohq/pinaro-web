@@ -13,11 +13,10 @@ export default function ScrollProgress() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <div className="absolute left-0 right-0 bottom-0 h-px bg-border/40">
+    <div className="fixed top-0 left-0 right-0 z-[60] h-px bg-border/40" aria-hidden>
       <div
         className="h-full bg-primary transition-[width] duration-150 ease-out"
         style={{ width: `${p}%` }}
-        aria-hidden
       />
     </div>
   );

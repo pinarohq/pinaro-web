@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Command, Moon, Sun, Menu, X } from 'lucide-react';
-import ScrollProgress from './ScrollProgress';
 import { useTheme } from '../../context/ThemeContext';
 import { PORTFOLIO } from '../../constants/testIds/portfolio';
 import { cn } from '@/lib/utils';
@@ -133,7 +132,6 @@ export default function Navigation({ onOpenCommand }) {
             </button>
           </div>
         </div>
-        <ScrollProgress />
       </div>
 
       <AnimatePresence>
