@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Command, Moon, Sun, Menu, X } from 'lucide-react';
-import ScrollProgress from './ScrollProgress';
 import { useTheme } from '../../context/ThemeContext';
 import { PORTFOLIO } from '../../constants/testIds/portfolio';
 import { cn } from '@/lib/utils';
@@ -20,17 +19,28 @@ export default function Navigation({ onOpenCommand }) {
   const [active, setActive] = useState('home');
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lastY, setLastY] = useState(0);
+  // Use a ref so tracking the previous scroll position never triggers a re-render
+  const lastY = useRef(0);
   const location = useLocation();
   const navigate = useNavigate();
   const onHome = location.pathname === '/';
+  // Keep onHome in a ref so the scroll handler always sees the current value
+  // without being listed as a dependency (which would re-attach the listener)
+  const onHomeRef = useRef(onHome);
+  useEffect(() => { onHomeRef.current = onHome; }, [onHome]);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setHidden(y > 120 && y > lastY);
-      setLastY(y);
-      if (!onHome) return;
+      const prev = lastY.current;
+      lastY.current = y;
+      // Only update React state when the hidden value actually changes,
+      // preventing spurious re-renders on every scroll tick
+      setHidden((h) => {
+        const next = y > 120 && y > prev;
+        return next !== h ? next : h;
+      });
+      if (!onHomeRef.current) return;
       const sections = ['home', 'about', 'services', 'work', 'process', 'testimonials', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -40,7 +50,10 @@ export default function Navigation({ onOpenCommand }) {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [lastY, onHome]);
+    // Intentionally empty — the listener is stable for the component lifetime.
+    // onHomeRef keeps the route flag current without triggering re-attachment.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const goTo = (id) => {
     setMobileOpen(false);
@@ -58,6 +71,7 @@ export default function Navigation({ onOpenCommand }) {
       animate={{ y: hidden ? -88 : 0 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50"
+      style={{ willChange: 'transform' }}
     >
       <div className="glass relative border-b border-border/60">
         <div className="container-prem flex items-center justify-between h-16 md:h-20">
@@ -118,7 +132,6 @@ export default function Navigation({ onOpenCommand }) {
             </button>
           </div>
         </div>
-        <ScrollProgress />
       </div>
 
       <AnimatePresence>

@@ -1,16 +1,23 @@
 import { useEffect, useRef } from 'react';
 
+// Evaluated once at module load — synchronous, no re-render needed.
+// On touch/tablet devices this is false and the component renders nothing.
+const HAS_FINE_POINTER =
+  typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
+
 /**
- * Subtle magnetic cursor. Hidden on touch devices. Expands over [data-magnetic] or interactive elements.
+ * Subtle magnetic cursor. Renders only on devices that report a fine pointer
+ * (mouse / trackpad). Returns null immediately on touch/tablet so no DOM nodes
+ * are created and no event listeners are attached.
  */
 export default function CustomCursor() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const isFine = window.matchMedia('(pointer: fine)').matches;
-    if (!isFine) return;
+    // Guard covers SSR and any edge case where the module-level check ran
+    // before the browser reported the correct pointer capability.
+    if (!HAS_FINE_POINTER) return;
     document.documentElement.classList.add('has-custom-cursor');
 
     const dot = dotRef.current;
@@ -51,6 +58,9 @@ export default function CustomCursor() {
       document.documentElement.classList.remove('has-custom-cursor');
     };
   }, []);
+
+  // Don't mount any DOM nodes on touch/tablet — nothing to get stuck in a corner.
+  if (!HAS_FINE_POINTER) return null;
 
   return (
     <>
