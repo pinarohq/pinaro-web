@@ -67,7 +67,7 @@ export default function Skills() {
               >
                 <div className="flex items-baseline justify-between mb-2">
                   <span className="font-semibold">{s.name}</span>
-                  <span className="font-mono text-xs text-muted-foreground">{s.years}y · {s.level}%</span>
+                  <span className="font-mono text-xs text-muted-foreground">{s.benefit}</span>
                 </div>
                 <div className="h-1 w-full bg-border rounded-full overflow-hidden">
                   <motion.div
