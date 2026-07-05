@@ -219,7 +219,7 @@
   /* Floating animation */
   @keyframes float-y {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-5px); }
   }
   .anim-float { animation: float-y 6s ease-in-out infinite; }
   .anim-float-slow { animation: float-y 9s ease-in-out infinite; }
