@@ -52,7 +52,7 @@ export default function Navigation({ onOpenCommand }) {
     return () => window.removeEventListener('scroll', onScroll);
     // Intentionally empty — the listener is stable for the component lifetime.
     // onHomeRef keeps the route flag current without triggering re-attachment.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, []);
 
   const goTo = (id) => {
