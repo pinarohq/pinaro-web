@@ -224,6 +224,34 @@
   .anim-float { animation: float-y 6s ease-in-out infinite; }
   .anim-float-slow { animation: float-y 9s ease-in-out infinite; }
 
+  /* Multi-directional drift — used by the Process section's floating cards.
+     Unlike float-y (single axis), these wander on both x and y so each
+     card reads as independently adrift rather than simply bobbing. */
+  @keyframes drift-a {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(18px, -22px); }
+    50%  { transform: translate(-12px, 15px); }
+    75%  { transform: translate(9px, -17px); }
+    100% { transform: translate(0px, 0px); }
+  }
+  @keyframes drift-b {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(-20px, 16px); }
+    50%  { transform: translate(13px, -20px); }
+    75%  { transform: translate(-9px, 11px); }
+    100% { transform: translate(0px, 0px); }
+  }
+  @keyframes drift-c {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(14px, -13px); }
+    50%  { transform: translate(-18px, 18px); }
+    75%  { transform: translate(8px, -11px); }
+    100% { transform: translate(0px, 0px); }
+  }
+  .anim-drift-a { animation: drift-a 8s ease-in-out infinite; }
+  .anim-drift-b { animation: drift-b 10s ease-in-out infinite; }
+  .anim-drift-c { animation: drift-c 9s ease-in-out infinite; }
+
   /* Pulsing dot */
   @keyframes pulse-ring {
     0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7); }
