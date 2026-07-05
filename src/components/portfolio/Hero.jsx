@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowRight, Sparkles, Code2, Terminal } from 'lucide-react';
+import { ArrowRight, Sparkles, Terminal } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import { PORTFOLIO } from '../../constants/testIds/portfolio';
 
@@ -70,7 +70,7 @@ export default function Hero() {
       id="home"
       ref={ref}
       onMouseMove={onMouseMove}
-      className="relative pt-28 md:pt-32 pb-20 md:pb-28 overflow-hidden"
+      className="relative pt-20 md:pt-24 pb-20 md:pb-28 overflow-hidden"
     >
       {/* Animated grid */}
       <div className="absolute inset-0 bg-grid opacity-30" aria-hidden />
@@ -133,16 +133,16 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-8 max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed"
           >
-            I&rsquo;m <span className="text-foreground font-semibold">Sumit</span> — a senior web engineer
-            running <span className="text-foreground font-semibold">Sumit Web Studio</span>. I build premium,
-            high-performance websites and products for ambitious brands and funded startups.
+            I build fast, polished digital products that convert.
+            <br />
+            Design, frontend, backend — one engineer, full responsibility.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.65 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            className="mt-6 flex flex-wrap items-center gap-3"
           >
             <MagneticButton
               testid={PORTFOLIO.heroCtaPrimary}
@@ -183,19 +183,25 @@ export default function Hero() {
             className="absolute top-[44%] left-[10%] glass rounded-2xl p-4 anim-float w-52"
           >
             <div className="flex items-center justify-between">
-              <Code2 className="h-4 w-4 text-primary" />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Lighthouse</span>
+              <span className="h-2 w-2 rounded-full bg-primary pulse-dot" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Status</span>
             </div>
-            <div className="font-display text-4xl font-black mt-2">99<span className="text-primary">.</span></div>
-            <div className="text-[11px] text-muted-foreground mt-1">avg across recent ships</div>
+            <div className="font-display text-4xl font-black mt-2">7<span className="text-primary">+</span></div>
+            <div className="text-[11px] text-muted-foreground mt-1">projects shipped · 2 slots open</div>
           </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground">
-        <span className="font-mono text-[10px] uppercase tracking-widest">scroll</span>
-        <span className="h-8 w-px bg-gradient-to-b from-primary to-transparent" />
+        <span className="font-mono text-[11px] uppercase tracking-widest opacity-60">scroll</span>
+        <span className="relative h-12 w-px overflow-hidden">
+          <motion.span
+            className="absolute top-0 left-0 h-full w-full bg-gradient-to-b from-primary via-primary to-transparent"
+            animate={{ y: ['0%', '100%'] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </span>
       </div>
 
     </section>
