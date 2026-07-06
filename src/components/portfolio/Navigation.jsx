@@ -76,9 +76,8 @@ export default function Navigation({ onOpenCommand }) {
       <div className="glass relative border-b border-border/60">
         <div className="container-prem flex items-center justify-between h-16 md:h-20">
           <Link to="/" data-testid={PORTFOLIO.navLogo} className="group flex items-center gap-2">
-            <div className="h-7 w-7 rounded-md bg-primary grid place-items-center text-primary-foreground font-display font-black text-sm">S</div>
-            <span className="font-display text-base md:text-lg font-black tracking-tight">
-              SUMIT<span className="text-primary">.</span>
+            <span className="font-display text-lg md:text-2xl font-black tracking-tight">
+              PINARO<span className="text-primary">.</span>
             </span>
           </Link>
 
