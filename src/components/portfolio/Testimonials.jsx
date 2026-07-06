@@ -65,10 +65,17 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <p className="mt-10 max-w-2xl text-sm text-muted-foreground border-t border-border/50 pt-6">
-          Trust is earned through consistent work and clear communication, not exaggerated claims —
-          that's the standard I hold every project to, whether it's a quick fix or a full build.
-        </p>
+        <div className="mt-10 max-w-2xl border-t border-border/50 pt-6 space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Trust is earned through consistent work and clear communication, not exaggerated claims —
+            that's the standard I hold every project to, whether it's a quick fix or a full build.
+          </p>
+          <p className="text-xs text-muted-foreground/50 leading-relaxed">
+            The testimonials above are illustrative placeholders, included to demonstrate how real client
+            feedback would be presented on your site. They do not represent actual clients or engagements.
+            When your project ships, this section fills with the real thing.
+          </p>
+        </div>
       </div>
     </section>
   );
